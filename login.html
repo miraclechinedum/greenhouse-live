@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="js/bootstrap.min.js" />
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+      crossorigin="anonymous"
+    ></script>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="styles/login.css" />
+
+    <title>Budtnder | Dashboard</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="block-center mt-xl wd-xl">
+        <!-- START panel-->
+        <div class="panel panel-dark panel-flat">
+          <script src="/vendor/jquery/dist/jquery.js"></script>
+          <script src="/js/layer/layer.js"></script>
+
+          <div class="panel-heading text-center">
+            <a href="#">
+              <img
+                src="images/fulllogo.png"
+                alt="Image"
+                class="block-center img-rounded"
+                width="60"
+              />
+            </a>
+          </div>
+          <div class="panel-body">
+            <p class="text-center pv">SIGN IN TO CONTINUE.</p>
+
+            <form
+              role="form"
+              data-parsley-validate=""
+              novalidate=""
+              class="mb-lg form1"
+              action="/site/checklogin"
+              method="post"
+            >
+              <div class="form-group has-feedback">
+                <input
+                  name="cellphone"
+                  id="cellphone"
+                  type="text"
+                  placeholder="Enter Country Code + Mobile Number"
+                  autocomplete="off"
+                  required=""
+                  class="form-control"
+                />
+                <span class="text-muted text-center">*e.g. 63xxxxxxxxxx</span>
+                <input name="is_influence" type="text" class="hide" value="1" />
+              </div>
+              <div id="captcha-box" class="form-group">
+                <div class="input-icon">
+                  <input type="hidden" name="captcha" value="" id="captcha" />
+                  <img
+                    id="captchaimg"
+                    src="images/captcha.png"
+                    alt="Refresh"
+                    title="Refresh"
+                    style="
+                      cursor: pointer;
+                      vertical-align: middle;
+                      width: 100px;
+                      height: 34px;
+                    "
+                    onclick=""
+                  />
+                  <input
+                    required=""
+                    name="verifyCode"
+                    placeholder="Captcha"
+                    class="form-control placeholder-no-fix"
+                    type="text"
+                    autocomplete="off"
+                    data-rule-remote="/site/getverifycode"
+                    data-msg-remote="Captcha is incorrect"
+                    id="verifyCode"
+                    style="width: 170px; margin-right: 20px; float: left"
+                  />
+                </div>
+              </div>
+              <div id="verifyCode_box" class="form-group">
+                <div class="input-icon">
+                  <!--                <input type="hidden" name="error_pass" value="0" id="error_pass">-->
+                  <input
+                    type="button"
+                    id="btn1"
+                    value="Send SMS Code"
+                    class="btn btn-primary btn-sm"
+                    onclick="sendemail()"
+                  />
+                  <input
+                    required=""
+                    name="smsCode"
+                    class="form-control placeholder-no-fix"
+                    type="text"
+                    autocomplete="off"
+                    placeholder="SMS Code"
+                    id="smsCode"
+                    style="width: 160px; margin-right: 7px; float: left"
+                  />
+                </div>
+              </div>
+
+              <div class="clearfix"></div>
+              <button
+                type="button"
+                onclick="dologin()"
+                class="btn btn-block btn-primary mt-lg"
+                id="btn_submit"
+              >
+                Login
+              </button>
+            </form>
+          </div>
+          <script>
+            $(document).ready(function () {
+              $(".hide1").click(function () {
+                $(".form1").css("display", "block");
+                $(".form2").css("display", "none");
+              });
+              $(".show1").click(function () {
+                $(".form2").css("display", "block");
+                $(".form1").css("display", "none");
+              });
+            });
+          </script>
+
+          <script type="text/javascript">
+            var countdown = 120;
+            function sendemail() {
+              var cellphone = $("#cellphone").val();
+              var captcha = $("#verifyCode").val();
+              if (!cellphone) {
+                layer.msg("CellPhone Number require");
+                return;
+              }
+              if (!captcha) {
+                layer.msg("captcha require");
+                return;
+              }
+              postCellphone(cellphone, captcha);
+            }
+            function settime(obj) {
+              //发送验证码倒计时
+              if (countdown == 0) {
+                obj.attr("disabled", false);
+                //obj.removeattr("disabled");
+                obj.val("Send SMS Code");
+                countdown = 120;
+                return;
+              } else {
+                obj.attr("disabled", true);
+                obj.val("Send Again(" + countdown + ")");
+                countdown--;
+              }
+              setTimeout(function () {
+                settime(obj);
+              }, 1000);
+            }
+
+            function postCellphone(cellphone, captcha) {
+              $.post(
+                "/site/sendverifysms",
+                {
+                  cellphone: cellphone,
+                  captcha: captcha,
+                },
+                function (json) {
+                  Deleteflag = true;
+                  if (json.info != "ok") {
+                    layer.msg(json.data);
+                    $("#captchaimg").click();
+                    return false;
+                  } else {
+                    layer.msg(json.data);
+                    var obj = $("#btn1");
+                    settime(obj);
+                  }
+                },
+                "json"
+              );
+              return;
+            }
+
+            function dologin() {
+              var cellphone = $("#cellphone").val();
+              var smsCode = $("#smsCode").val();
+              var verifyCode = $("#verifyCode").val();
+              if (!cellphone) {
+                layer.msg("CellPhone Number require");
+                $("#cellphone").focus();
+                return;
+              }
+              if (!verifyCode) {
+                layer.msg("Captcha require");
+                $("#verifyCode").focus();
+                return;
+              }
+              if (!smsCode) {
+                layer.msg("smsCode require");
+                $("#smsCode").focus();
+                return;
+              }
+              var loading = layer.load(2, { time: 10000 });
+              $.post(
+                "/site/checklogin",
+                {
+                  cellphone: cellphone,
+                  smsCode: smsCode,
+                  verifyCode: verifyCode,
+                },
+                function (json) {
+                  layer.close(loading);
+                  Deleteflag = true;
+                  if (json.info != "ok") {
+                    layer.msg(json.data, { icon: 2, time: 2000 });
+                    return false;
+                  } else {
+                    window.location.href = "/site/index";
+                  }
+                },
+                "json"
+              );
+              return;
+            }
+          </script>
+
+          <script>
+            $(function () {
+              var Deleteflag = true;
+
+              $(".btn1").on("click", function (e) {
+                var _this = $(this);
+                var cellphone = $(".cellphone");
+                var uid = _this.attr("data-id");
+                var i = $(".btn1").index(this);
+                alert(cellphone);
+                if (!Deleteflag) {
+                  return;
+                }
+
+                layer.confirm(
+                  "Are you sure you want to perform this operation?",
+                  {
+                    title: "Information",
+                    btn: ["Cancel", "Confirm"], //按钮
+                  },
+                  function (index) {
+                    layer.close(index);
+                  },
+                  function () {
+                    Deleteflag = false;
+                    $.post(
+                      "/users/delete",
+                      {
+                        uid: uid,
+                      },
+                      function (json) {
+                        Deleteflag = true;
+                        if (json.info != "ok") {
+                          layer.msg(json.data);
+                          return false;
+                        }
+                        $(".del_flag").eq(i).remove();
+                      },
+                      "json"
+                    );
+                  }
+                );
+                return;
+              });
+            });
+          </script>
+        </div>
+        <!-- END panel-->
+        <div class="p-lg text-center">
+          <span>©</span>
+          <span>2022</span>
+          <span>-</span>
+          <span>Budtnder Tv</span>
+          <br />
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

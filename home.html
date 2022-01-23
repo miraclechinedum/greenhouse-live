@@ -38,12 +38,19 @@
       crossorigin="anonymous"
     ></script>
 
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+      crossorigin="anonymous"
+    />
+
     <link rel="stylesheet" href="styles/home.css" />
 
     <title>Budtnder TV Live</title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg">
+    <!-- <nav class="navbar navbar-expand-lg">
       <div class="container-fluid">
         <a class="navbar-brand" href="/">
           <img src="/images/fulllogo.png" alt="logo" />
@@ -57,21 +64,16 @@
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <!-- <span class="navbar-toggler-icon"></span> -->
           <i class="fa fa-bars" style="color: #fff"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <div class="flex-con">
             <div>
-              <!-- <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item"> -->
-              <a class="nav-link" href="#">Browse</a>
-              <!-- </li> -->
 
-              <!-- <li class="nav-item"> -->
+              <a class="nav-link" href="browse.html">Browse</a>
+
               <a class="nav-link" href="#">PopUps</a>
-              <!-- </li> -->
-              <!-- </ul> -->
+
             </div>
 
             <div class="d-flex">
@@ -83,22 +85,549 @@
                 </button>
               </a>
 
-              <a href="">
+              <a href="buy-nuggs.html">
                 <button class="btn btn-outline-success" type="submit">
                   Buy Nuggs
                 </button>
               </a>
 
-              <a href="">
+              <a
+                href="#exampleModal"
+                data-bs-toggle="modal"
+                data-bs-target="#myModal"
+              >
                 <button class="btn btn-outline-success" type="submit">
                   Log-In
                 </button>
               </a>
+              
             </div>
           </div>
         </div>
       </div>
+    </nav> -->
+
+    <div class="d-none d-xl-block d-lg-block d-md-block tabinator bg-dark-mode">
+      <a class="pb-2 pl-1 pt-0 tab-logo" href="/">
+        <img class="img-fluid" width="100" src="images/fulllogo.png" alt="" />
+      </a>
+      <a href="browse.html" id="tab-browse" class="">Browse</a>
+      <!-- <a href="/site/gaming" id="tab-gaming" class="">Gaming</a> -->
+      <a href="popups.html" id="tab-events" class="">PopUps</a>
+
+      <!-- not logged in user -->
+      <a class="float-right pr-0 pl-3">
+        <button
+          class="btn btn-purple login-btn"
+          data-bs-toggle="modal"
+          data-bs-target="#myModal"
+        >
+          Log-In
+        </button>
+      </a>
+
+      <!-- <a href="#" class="float-right pr-0">
+              <button class="btn btn-purple login-btn">Sign-up</button>
+          </a> -->
+      <!-- login user -->
+
+      <a
+        href="buy-nuggs.html"
+        class="float-right pr-0 pl-3 btn-buy-coins-main-a"
+      >
+        <button class="btn btn-buy-coins-main">
+          <img src="/img/coin.png" alt="" />Buy Nuggs
+        </button>
+      </a>
+
+      <a
+        href="login.html"
+        class="float-right pr-0 pl-3 btn-creators-studio-main-a"
+      >
+        <button class="btn btn-creators-studio-main">Creator's Studio</button>
+      </a>
+
+      <div
+        id="firstSearch-1"
+        class="search-box-wrap float-right text-white typeahead__container"
+      >
+        <button class="btn-search"><i class="fas fa-search"></i></button>
+        <span class="typeahead__cancel-button">×</span
+        ><input
+          type="text"
+          class="input-search typeahead font-cirularxxt"
+          placeholder="search ..."
+          value=""
+        />
+        <!-- <div id="searchTooltip" class="card p-1 text-danger mt-2 position-relative d-none">Required*</div> -->
+      </div>
+
+      <div id="tab-content"></div>
+    </div>
+
+    <!-- mobile -->
+
+    <nav
+      class="d-sm-flex d-xl-none d-lg-none d-md-none navbar navbar-expand navbar-light bg-dark-mode static-top theme-nav sticky-top text-white"
+      
+    >
+      <a class="navbar-brand mr-1 ml-xl-5" href="/">
+        <img
+          class="img-fluid mt-1 ml-2"
+          width="90"
+          src="images/fulllogo.png"
+          alt=""
+        />
+      </a>
+      <!-- Navbar Search -->
+      <div
+        class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-5 my-2 my-md-0 theme-navbar-search"
+      ></div>
+
+      <ul
+        class="navbar-nav ml-auto ml-md-0 theme-right-navbar align-items-center"
+      >
+        <!-- search -->
+        <li class="nav-item theme-right-navbar-user d-md-block">
+          <div id="firstSearch-2" class="search-box-wrap typeahead__container">
+            <button class="btn-search"><i class="fas fa-search"></i></button>
+            <span class="typeahead__cancel-button">×</span
+            ><input
+              type="text"
+              class="input-search typeahead font-cirularxxt"
+              placeholder="search ..."
+              value=""
+            />
+            <!-- <div id="searchTooltip" class="card p-1 text-danger mt-2 position-relative d-none">Required*</div> -->
+          </div>
+        </li>
+        <!-- not logged in user -->
+        <li class="nav-item theme-right-navbar-user d-md-block d-none">
+          <a class="nav-link login-button" href="#loginapp">
+            <button class="btn btn-login" id="#loginbtn">Log-In</button>
+          </a>
+        </li>
+        <li
+          class="nav-item dropdown no-arrow theme-right-navbar-user d-md-none text-white"
+        >
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="guestDropdown"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <i class="fas fa-bars text-info"></i>
+          </a>
+          <div
+            class="dropdown-menu dropdown-menu-right kumu-dropdown-menu"
+            aria-labelledby="guestDropdown"
+          >
+            <a class="dropdown-item text-white d-md-none" href="#loginapp"
+              >Log-In</a
+            >
+            <div class="dropdown-divider d-md-none"></div>
+            <a class="dropdown-item text-white d-md-none" href="/site/browse"
+              >Browse</a
+            >
+            <!-- <div class="dropdown-divider  d-md-none"></div>
+                    <a class="dropdown-item text-white d-md-none" href="/site/gaming">Gaming</a> -->
+            <div class="dropdown-divider d-md-none"></div>
+            <a class="dropdown-item text-white d-md-none" href="/site/events"
+              >Events</a
+            >
+          </div>
+        </li>
+        <!-- login user -->
+      </ul>
     </nav>
+
+    <div class="login-custom-modal modal fade" id="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content p-3">
+          <div class="modal-header text-center">
+            <a
+              class="close pt-2"
+              data-dismiss="modal"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            >
+              <img src="images/close.png" alt="" />
+            </a>
+          </div>
+          <div class="modal-body text-center">
+            <div
+              class="row row-step login-selection-panel"
+              data-step="step-one"
+            >
+              <div class="col-12">
+                <label class="login-label" style="color: #fff">Log-in</label>
+                <div class="sub-label"></div>
+                <div class="row justify-content-center">
+                  <div
+                    class="login-options js-btn-step"
+                    data-orientation="next"
+                    data-page="kumu-username"
+                    data-toggle="tooltip"
+                    title=""
+                    data-original-title="Login via Username"
+                  >
+                    <img
+                      src="images/login-kumu-small.png"
+                      alt=""
+                      class="kumu-login-img"
+                    />
+                  </div>
+
+                  <div
+                    class="login-options js-btn-step"
+                    data-orientation="next"
+                    data-page="qr-code"
+                    data-toggle="tooltip"
+                    title=""
+                    data-original-title="Login via QR Code"
+                  >
+                    <img src="images/login-via-qr.png" alt="" />
+                  </div>
+                </div>
+
+                <div class="row justify-content-center">
+                  <div
+                    class="login-options js-btn-step"
+                    data-orientation="next"
+                    data-page="fb-login"
+                    data-toggle="tooltip"
+                    title=""
+                    data-original-title="Login via Facebook"
+                  >
+                    <img src="images/facebook.png" alt="" />
+                  </div>
+
+                  <div
+                    class="login-options js-btn-step"
+                    id="google-login"
+                    data-orientation="next"
+                    data-page="google-login"
+                    data-toggle="tooltip"
+                    title=""
+                    data-original-title="Login via Google"
+                  >
+                    <img src="images/google.png" class="googleLinkBtn" alt="" />
+                    <div
+                      class="g-signin2 d-none"
+                      id="googleLink"
+                      data-onsuccess="onGoogleSignIn"
+                      data-gapiscan="true"
+                      data-onload="true"
+                    >
+                      <div
+                        style="height: 36px; width: 120px"
+                        class="abcRioButton abcRioButtonLightBlue"
+                      >
+                        <div class="abcRioButtonContentWrapper">
+                          <div class="abcRioButtonIcon" style="padding: 8px">
+                            <div
+                              style="width: 18px; height: 18px"
+                              class="abcRioButtonSvgImageWithFallback abcRioButtonIconImage abcRioButtonIconImage18"
+                            >
+                              <svg
+                                version="1.1"
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="18px"
+                                height="18px"
+                                viewBox="0 0 48 48"
+                                class="abcRioButtonSvg"
+                              >
+                                <g>
+                                  <path
+                                    fill="#EA4335"
+                                    d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"
+                                  ></path>
+                                  <path
+                                    fill="#4285F4"
+                                    d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"
+                                  ></path>
+                                  <path
+                                    fill="#FBBC05"
+                                    d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"
+                                  ></path>
+                                  <path
+                                    fill="#34A853"
+                                    d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"
+                                  ></path>
+                                  <path fill="none" d="M0 0h48v48H0z"></path>
+                                </g>
+                              </svg>
+                            </div>
+                          </div>
+                          <span
+                            style="font-size: 13px; line-height: 34px"
+                            class="abcRioButtonContents"
+                            ><span id="not_signed_inoz5jonlyr9d3">Sign in</span
+                            ><span
+                              id="connectedoz5jonlyr9d3"
+                              style="display: none"
+                              >Signed in</span
+                            ></span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="login-options js-btn-step"
+                    data-orientation="next"
+                    data-page="apple-login"
+                    data-toggle="tooltip"
+                    title=""
+                    data-original-title="Login via Apple"
+                  >
+                    <img src="images/apple.png" alt="" />
+                  </div>
+                </div>
+                <div class="row justify-content-center agreement">
+                  <div class="col-auto text-center">
+                    <label class="checkbox-container text-white">
+                      <input
+                        type="checkbox"
+                        name="login_terms"
+                        id="login_terms"
+                        required=""
+                      />
+                      <span class="checkmark"></span>
+                    </label>
+                  </div>
+                  <div
+                    class="col-xl-5 col-lg-5 col-md-5 col-sm-9 col-10 pr-0 pl-1"
+                  >
+                    <label for="login_terms">
+                      I have read and agreed to Budtnder's Tv
+                      <a
+                        href="https://kumu.ph/terms-of-use"
+                        target="_blank"
+                        class="text-white"
+                        ><u>User Agreement</u></a
+                      >
+                      and
+                      <a
+                        href="https://kumu.ph/privacy-policy"
+                        target="_blank"
+                        class="text-white"
+                        ><u>Privacy Policy</u></a
+                      >.<span> </span
+                    ></label>
+                  </div>
+                </div>
+                <div class="row justify-content-center footer-info">
+                  <div class="col-11">
+                    <div>
+                      You must download and create an account first on Budtnder
+                      mobile app.
+                    </div>
+                    <div>
+                      Don’t have an account yet?
+                      <a
+                        href="#downloadapp"
+                        id="downloadappbutton"
+                        data-toggle="modal"
+                        data-target="#downloadAppModal"
+                        onclick="hideLoginModal()"
+                        >Click here</a
+                      >
+                      to receive a link on your mobile.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="row row-step d-none kumu-username-panel"
+              data-step="kumu-username"
+            >
+              <div class="col-12">
+                <label class="login-label">Log-in via SSO</label>
+                <div class="sub-label"></div>
+                <div class="row justify-content-center">
+                  <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-12">
+                    <div class="form-group">
+                      <div class="">
+                        <input
+                          id="username"
+                          class="form-control"
+                          placeholder="Username"
+                          name="username"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-12">
+                    <div class="d-flex form-group align-items-center">
+                      <div
+                        class="col-xl-8 col-lg-6 col-md-6 col-sm-6 col-8 pl-0"
+                      >
+                        <input
+                          id="captcha"
+                          class="form-control"
+                          placeholder="Captcha"
+                          name="captcha"
+                        />
+                      </div>
+                      <div
+                        class="col-xl-3 col-lg-3 col-md-3 col-4 px-1 text-nowrap"
+                      >
+                        <span class="captchaText"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-12">
+                    <div class="d-flex form-group align-items-center">
+                      <div
+                        class="col-xl-8 col-lg-6 col-md-6 col-sm-6 col-8 pl-0"
+                      >
+                        <input
+                          id="otp"
+                          class="form-control otp"
+                          placeholder="OTP"
+                          name="otp"
+                        />
+                      </div>
+                      <div
+                        class="col-xl-3 col-lg-3 col-md-3 col-4 px-1 text-nowrap"
+                      >
+                        <a
+                          href="#"
+                          id="sendOtp"
+                          class="send-otp-button text-white"
+                        >
+                          Send OTP
+                        </a>
+
+                        <div class="send-otp-button disabled d-none">
+                          Send OTP
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row justify-content-center">
+                  <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-12">
+                    <button
+                      class="btn btn-submit"
+                      id="loginUserViaKumu"
+                      type="button"
+                    >
+                      Submit
+                    </button>
+                  </div>
+                  <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-12">
+                    <div
+                      class="btn-back js-btn-step"
+                      data-orientation="previous"
+                      data-page="step-one"
+                    >
+                      &lt; Back
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row row-step d-none" data-step="qr-code">
+              <div class="col-12">
+                <label class="login-label">Log-in via QR</label>
+                <div class="sub-label">
+                  Open your kumu app, and scan your QR code on the top right of
+                  My Profile.
+                </div>
+                <div class="row justify-content-center">
+                  <div class="col-6 qr-code-panel">
+                    <img class="qrCodeImg d-none" src="" alt="" />
+                    <div class="reload-qr pl-4 d-none">
+                      <i class="fas fa-redo fa-3x pl-4"></i>
+                      <p class="mt-2 pl-4">Click to reload QR code</p>
+                    </div>
+                  </div>
+                  <div
+                    class="w-auto d-none d-xl-inline d-lg-inline d-md-inline d-sm-inline"
+                  >
+                    <img src="/img/scan-qr-phone.png" height="369" alt="" />
+                  </div>
+                </div>
+
+                <div class="row justify-content-center mb-5 mt-3">
+                  <div class="col-xl-8">
+                    <div
+                      class="btn-back js-btn-step"
+                      data-orientation="previous"
+                      data-page="step-one"
+                    >
+                      Back to Log-in options
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="downloadAppModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content p-3">
+          <div class="modal-header text-center">
+            <a
+            class="close pt-2"
+            data-dismiss="modal"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          >
+            <img src="images/close.png" alt="" />
+          </a>
+          </div>
+          <div class="modal-body">
+            <div class="modal-title">Send Me The App</div>
+            <div class="modal-body-content">
+              <form
+                action="https://kumu-alternate.app.link/PNQg4Z7Qu0?__branch_flow_type=deepview_tmta&amp;__branch_flow_id=768771099283776860&amp;__branch_desktop_deepview_type=1"
+                method="POST"
+              >
+                <div class="row justify-content-center">
+                  <div class="col-xl-6 col-lg-6 col-12">
+                    <div class="form-group d-flex">
+                      <!-- <label for="phone" class="col-auto col-form-label text-white">Mobile Number</label> -->
+                      <div class="col">
+                        <input
+                          name="phone"
+                          type="number"
+                          class="form-control form-control-sm bg-white"
+                          required=""
+                          placeholder="ex. 639177480908"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="text-center">
+                  <button
+                    type="submit"
+                    class="btn btn-submit"
+                    id="phone_submit"
+                  >
+                    Send
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div class="container-fluid">
       <div class="top-category section-padding mt-4 mb-3 homepage">
@@ -1124,6 +1653,22 @@
       });
       $(".stop").on("click", function () {
         owl.trigger("stop.owl.autoplay");
+      });
+
+      var myModal = document.getElementById("myModal");
+      var myInput = document.getElementById("myInput");
+
+      myModal.addEventListener("shown.bs.modal", function () {
+        myInput.focus();
+      });
+    </script>
+
+    <script>
+      $(document).on("click", "#downloadappbutton", function () {
+        $("#myModal").modal("toggle");
+        $("#downloadAppModal").modal("show");
+
+        return false;
       });
     </script>
   </body>

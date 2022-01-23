@@ -1,0 +1,25 @@
+.nav-tabs {
+    border: none;
+}
+
+.nav-tabs li .nav-link {
+    color: #fff;
+    font-size: 14px;
+}
+
+/* .nav-tabs .active {
+    border-bottom: 1px solid turquoise;
+} */
+
+.nav-tabs .nav-link {
+    border: 3px solid green;
+    color: #fff !important;
+    background-color: transparent !important;
+    border: none !important;
+}
+
+.nav-tabs .nav-link:hover {
+    border-color: transparent;
+    background-color: transparent;
+    border-bottom: 1px solid turquoise !important;
+} 
