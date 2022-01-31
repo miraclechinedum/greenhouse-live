@@ -1,0 +1,62 @@
+#consent {
+    min-height: 100vh;
+    background-color: black;
+}
+
+.consentForm {
+    margin-top: 120px;
+    margin-bottom: 80px;
+    width: 50%;
+    margin-left: 25%;
+}
+
+.consentBJ {
+    font-family: 'Lobster Two', cursive;
+    font-size: 50px;
+    color: white;
+    padding-bottom: 20px;
+}
+
+.consentQuestion {
+    font-family: 'Avenir';
+    font-size: 24px;
+    color: #ffffff;
+}
+
+.consentOptions, .consentQuestion, .consentFailedResponse {
+    animation-name: fadeIn;
+    animation-duration: 3s;
+}
+
+.consentOptions {
+    display: flex;
+    flex-wrap: wrap;
+    /* align-items: center; */
+    justify-content: space-between;
+    margin: auto;
+}
+
+.consentYes {
+    font-family: 'Avenir';
+    padding: 10px 40px;
+    border-radius: 50px;
+    font-size: 24px;
+    text-decoration: none;
+    border: solid 1px white;
+    background: black;
+    color: white;
+    margin-bottom: 7%;  
+}
+
+.consentNo {
+    font-family: 'Avenir';
+    padding: 10px 40px;
+    border-radius: 50px;
+    font-size: 24px;
+    text-decoration: none;
+    border: solid 1px white;
+    background: black;
+    color: white;
+    margin-bottom: 7%;  
+    /* margin-left: 15px; */
+}
